@@ -1,10 +1,10 @@
 .posts-wrapper.row
     -@posts.each do |post|
-        .post
+        .post   
             .post-head
                 .thumb-img
                 .user-name
-                    =post.user.user_name
+                    = post.user.user_name
             .image.center-block
                 =link_to (image_tag post.image.url(:medium), class:'img-responsive'), post_path(post)
             .post-bottom
@@ -20,7 +20,9 @@
                             .comment-content
                                 = comment.content
                             - if comment.user == current_user
-                                = link_to post_comment_path(post, comment), method: :delete, data: { confirm: "Are you sure?" }
+                                = link_to post_comment_path(post, comment), method: :delete, data: { confirm: "Are you sure?"}
                 .comment-form
-                    = form_for [post, post.comments.new] do |f|
-                        = f.text_field :content, placeholder: 'Add a comment...'
+                    = form_for [post, post.comment.new] do |f|
+                        =f.text_field :content, placeholder: "Add a comment..."
+            %p.caption
+                =post.caption
